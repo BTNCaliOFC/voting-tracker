@@ -1,3 +1,21 @@
+"use client";  // ✅ Must be the first line
+
+import { useSession, signOut } from "next-auth/react";
+
+export default function HomePage() {
+  const { data: session } = useSession();
+
+  if (!session) {
+    return <p>You need to <a href="/login">log in</a> to view this page.</p>;
+  }
+
+  return (
+    <div>
+      <h1>Welcome, {session.user.email}!</h1>
+      <button onClick={() => signOut()}>Logout</button>
+    </div>
+  );
+}
 import Image from "next/image";
 
 export default function Home() {
@@ -98,23 +116,6 @@ export default function Home() {
           Go to nextjs.org →
         </a>
       </footer>
-    </div>
-  );
-}
-"use client";
-import { useSession, signOut } from "next-auth/react";
-
-export default function HomePage() {
-  const { data: session } = useSession();
-
-  if (!session) {
-    return <p>You need to <a href="/login">log in</a> to view this page.</p>;
-  }
-
-  return (
-    <div>
-      <h1>Welcome, {session.user.email}!</h1>
-      <button onClick={() => signOut()}>Logout</button>
     </div>
   );
 }
