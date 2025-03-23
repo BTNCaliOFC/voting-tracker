@@ -101,3 +101,20 @@ export default function Home() {
     </div>
   );
 }
+"use client";
+import { useSession, signOut } from "next-auth/react";
+
+export default function HomePage() {
+  const { data: session } = useSession();
+
+  if (!session) {
+    return <p>You need to <a href="/login">log in</a> to view this page.</p>;
+  }
+
+  return (
+    <div>
+      <h1>Welcome, {session.user.email}!</h1>
+      <button onClick={() => signOut()}>Logout</button>
+    </div>
+  );
+}
