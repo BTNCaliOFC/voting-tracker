@@ -1,4 +1,3 @@
-// ✅ Ensure this is the FIRST LINE
 "use client";
 
 import { useSession, signOut } from "next-auth/react";
